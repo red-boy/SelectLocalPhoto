@@ -76,7 +76,7 @@ public class PreviewActivity extends Activity {
 
     public static void newInstance(Context context, ArrayList<String> selectList) {
         Intent intent = new Intent(context, PreviewActivity.class);
-        intent.putStringArrayListExtra("select", selectList);
+        intent.putStringArrayListExtra("select", selectList);//传递list集合数据
         context.startActivity(intent);
     }
 }

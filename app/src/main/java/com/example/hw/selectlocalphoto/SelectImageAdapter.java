@@ -16,6 +16,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 选择预览图片的RecyclerView适配器
+ */
 public class SelectImageAdapter extends RecyclerView.Adapter<SelectImageAdapter.ViewHolder> {
     private Context context;
     private List<String> listPath = new ArrayList<>();

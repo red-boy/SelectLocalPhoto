@@ -15,6 +15,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 选择所有图片的RecyclerView适配器
+ */
 public class SelectPicAdapter extends RecyclerView.Adapter<SelectPicAdapter.ViewHolder> {
     private List<AllImageBean> lists;
     private Context context;

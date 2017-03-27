@@ -19,7 +19,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.ll)
     LinearLayout ll;
     @BindView(R.id.image_back)
-    ImageView image_back;
+    ImageButton image_back;
     @BindView(R.id.tv_preview)
     TextView tv_preview;
     @BindView(R.id.tv_allPic)
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.tv_preview, R.id.tv_allPic})
+    @OnClick({R.id.tv_preview, R.id.tv_allPic, R.id.image_back})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_preview://预览
@@ -82,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.tv_allPic://所有图片
                 showPopup();
+                break;
+            case R.id.image_back:
+                finish();
                 break;
         }
     }
@@ -156,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));//网格布局，3列
         adapter = new SelectImageAdapter(this, listPath);
         mRecyclerView.setAdapter(adapter);
         //adapter设置监听图片选择变化的监听
@@ -226,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 使用ContentProvider扫描手机助手的图片
+     * 查询jpeg、gif、bmp和png格式的图片
      */
     private void initViews() {
         new Thread(new Runnable() {
@@ -236,8 +240,11 @@ public class MainActivity extends AppCompatActivity {
                 Cursor cursor = contentResolver.query(
                         mImageUri,
                         null,
-                        null,
-                        null,
+                        MediaStore.Images.Media.MIME_TYPE + "=? or "
+                                + MediaStore.Images.Media.MIME_TYPE + "=? or "
+                                + MediaStore.Images.Media.MIME_TYPE + "=? or "
+                                + MediaStore.Images.Media.MIME_TYPE + "=?",
+                        new String[]{"image/jpeg", "image/png", "image/gif", "image/bmp"},
                         MediaStore.Images.Media.DATE_MODIFIED);
 
                 if (cursor == null) {
@@ -263,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //添加所有图片
                 groupMap.put("所有图片", listAllPic);
-                //通知handler
+                //通知handler扫描图片完成
                 mHandler.sendEmptyMessage(0);
                 cursor.close();
             }

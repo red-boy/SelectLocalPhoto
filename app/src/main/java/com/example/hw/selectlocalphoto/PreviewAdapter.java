@@ -40,7 +40,7 @@ public class PreviewAdapter extends PagerAdapter {
                 .load("file://" + selectPath.get(position))
                 .into(photoView);
         container.addView(photoView, ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT);
+                ViewGroup.LayoutParams.MATCH_PARENT);//将photoView加载进viewPager中
 
         photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
             @Override
