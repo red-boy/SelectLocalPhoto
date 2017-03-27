@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                popDissmiss();
+                popDissmiss();//点击空白处，返回及去除Popup
             }
         });
         view2.setOnClickListener(new View.OnClickListener() {
@@ -107,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
         });
         RecyclerView recycler_view = (RecyclerView) popupView.findViewById(R.id.recycler_view);
         recycler_view.setLayoutManager(new LinearLayoutManager(this));
-        recycler_view.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.VERTICAL, 4, Color.parseColor("#dcdcdc")));
+        recycler_view.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL,1, Color.parseColor("#303F9F")));//自定义的RecycleView分割线
         selectPicAdapter = new SelectPicAdapter(list, this);
         recycler_view.setAdapter(selectPicAdapter);
         popupWindow = new PopupWindow(popupView);
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.showAtLocation(mRecyclerView, Gravity.BOTTOM, 0, dp2px(50, MainActivity.this));
+        popupWindow.showAtLocation(mRecyclerView, Gravity.BOTTOM, 0, dp2px(50, MainActivity.this));//相对于父控件的位置
         popupWindow.update();
 
         selectPicAdapter.setOnItemClickListener(new SelectPicAdapter.OnItemClickListener() {
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //监听系统的返回键
+    //监听系统的返回键：若popupWindow仍存在，先退出
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {

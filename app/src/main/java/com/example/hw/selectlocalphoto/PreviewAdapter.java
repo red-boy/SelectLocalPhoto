@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
+/**
+ * 预览图片的ViewPager的适配器
+ */
 public class PreviewAdapter extends PagerAdapter {
 
     private Context context;

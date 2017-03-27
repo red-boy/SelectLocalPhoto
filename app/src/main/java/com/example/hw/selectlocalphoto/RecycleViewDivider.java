@@ -11,6 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+/**自定义
+ *
+ * RecyclerView分割线：
+ * ItemDecoration下有三个方法，ItemDecoration并没有对其实现，需要我们自己完成
+ */
 public class RecycleViewDivider extends RecyclerView.ItemDecoration {
     private Paint mPaint;
     private Drawable mDivider;
@@ -19,7 +24,7 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
     private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
 
     /**
-     * 默认分割线：高度为2px，颜色为灰色
+     * 默认分割线：水平位置，高度为2px，颜色为灰色
      *
      * @param context
      * @param orientation 列表方向
@@ -69,7 +74,7 @@ public class RecycleViewDivider extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         super.getItemOffsets(outRect, view, parent, state);
-        outRect.set(0, 0, 0, mDividerHeight);
+        outRect.set(0, 0, 0, mDividerHeight);//为每个Item设置一定的偏移量
     }
 
     //绘制分割线
